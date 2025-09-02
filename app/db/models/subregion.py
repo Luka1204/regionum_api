@@ -1,12 +1,12 @@
-from sqlalchemy import Column, BigInteger,String,Text, TIMESTAMP, SmallInteger
-from db.app.base import Base
+from sqlalchemy import Column, BigInteger,String,Text, TIMESTAMP, SmallInteger,ForeignKey
+from app.db.base import Base
 
 class SubRegion(Base):
     __tablename__="subregions"
     id = Column(BigInteger, primary_key=True, index=True, nullable=False)
     name = Column(String(100),nullable=False)
     translations = Column(Text, nullable=True)
-    region_id = Column(BigInteger, nullable=False, foreign_key="regions.id")
+    region_id = Column(BigInteger, ForeignKey("regions.id"),nullable=False)
     created_at = Column(TIMESTAMP, nullable=True)
     updated_at = Column(TIMESTAMP, nullable=False)
     flag = Column(SmallInteger, nullable=False)

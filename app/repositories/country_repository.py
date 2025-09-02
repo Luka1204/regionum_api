@@ -15,4 +15,3 @@ class CountryRepository:
         db.commit()
         db.refresh(db_country)
         return db_country
-    

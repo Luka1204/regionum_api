@@ -6,7 +6,6 @@ class Region(Base):
     id = Column(BigInteger, primary_key=True, index=True, nullable=False)
     name = Column(String(100), nullable=False)
     translations = Column(Text, nullable=True)
-    code = Column(String(10), nullable=True)
     created_at = Column(TIMESTAMP, nullable=True)
     updated_at = Column(TIMESTAMP, nullable=False)
     flag = Column(SmallInteger, nullable=False)

@@ -1,13 +1,13 @@
-from sqlalchemy import Column, Integer, String, Text, TIMESTAMP, SmallInteger,BigInteger,Numeric
+from sqlalchemy import Column, Integer, String, Text, TIMESTAMP, SmallInteger,BigInteger,Numeric,ForeignKey
 from app.db.base import Base
 
 class State(Base):
     __tablename__ = "states"
     id = Column(BigInteger, nullable=False,primary_key=True, index=True)
     name = Column(String(100), nullable=False)
-    country_id = Column(BigInteger, nullable=False, foreign_key="countries.id")
+    country_id = Column(BigInteger, ForeignKey("countries.id"),nullable=False)
     country_code = Column(String(2),nullable=False)
-    flips_code = Column(String(255),nullable=True)
+    fips_code = Column(String(255),nullable=True)
     iso2 = Column(String(2),nullable=True)
     type = Column(String(191),nullable=True)
     level = Column(Integer,nullable=True)
@@ -25,12 +25,12 @@ class State(Base):
     def __str__(self):
         return f"<State {self.name}>"
     
-    def __init__(self, name, country_id, country_code, flips_code, iso2, type, level, parent_id, latitude, longitude,
+    def __init__(self, name, country_id, country_code, fips_code, iso2, type, level, parent_id, latitude, longitude,
                  created_at, updated_at, flag, wikiDataId):
         self.name = name
         self.country_id = country_id
         self.country_code = country_code
-        self.flips_code = flips_code
+        self.fips_code = fips_code
         self.iso2 = iso2
         self.type = type
         self.level = level

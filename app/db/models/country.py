@@ -1,4 +1,4 @@
-from sqlalchemy import Column,Integer,String,BigInteger,Text,Numeric,TIMESTAMP,SmallInteger,DateTime
+from sqlalchemy import Column,Integer,String,BigInteger,Text,Numeric,TIMESTAMP,SmallInteger,DateTime,ForeignKey
 from app.db.base import Base
 
 class Country(Base):
@@ -16,9 +16,9 @@ class Country(Base):
     tld = Column(String(255),nullable=True)
     native = Column(String(255),nullable=True)
     region = Column(String(255),nullable=True)
-    region_id = Column(BigInteger,nullable=True,foreign_key="regions.id")
+    region_id = Column(BigInteger,ForeignKey("regions.id"),nullable=True)
     subregion = Column(String(255),nullable=True)
-    subregion_id = Column(BigInteger,nullable=True,foreign_key="subregions.id")
+    subregion_id = Column(BigInteger,ForeignKey("subregions.id"),nullable=True)
     nationality = Column(String(255), nullable=True)
     timezones = Column(Text,nullable=True)
     translations = Column(Text,nullable=True)

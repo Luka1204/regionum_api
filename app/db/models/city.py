@@ -1,13 +1,13 @@
-from sqlalchemy import Column,Integer,String,BigInteger,SmallInteger,Text,TIMESTAMP,Numeric,SmallInteger
+from sqlalchemy import Column,Integer,String,BigInteger,SmallInteger,Text,TIMESTAMP,Numeric,SmallInteger,ForeignKey
 from app.db.base import Base
 
 class City(Base):
     __tablename__ = "cities"
     id = Column(BigInteger, primary_key=True, index=True, nullable=False)
     name = Column(String(255), nullable=False)
-    state_id = Column(BigInteger, nullable=False, foreign_key="states.id")
+    state_id = Column(BigInteger, ForeignKey("states.id"), nullable=False, )
     state_code = Column(String(255),nullable=False)
-    country_id = Column(BigInteger, nullable=False, foreign_key="countries.id")
+    country_id = Column(BigInteger, ForeignKey("countries.id"), nullable=False, )
     country_code = Column(String(2),nullable=False)
     latitude = Column(Numeric(10, 8), nullable=False)
     longitude = Column(Numeric(11, 8), nullable=False)
