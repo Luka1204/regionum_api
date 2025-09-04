@@ -4,4 +4,6 @@ psycopg2-binary
 pydantic
 python-dotenv
 pydantic-settings
-dogpyle
+dogpile.cache
+orjson
+fastapi
