@@ -1,9 +1,11 @@
 from typing import Optional, List,Iterator,Any,Dict
 from sqlalchemy.orm import Session as SASession
 from sqlalchemy import create_engine
+
+from app.services.cache.cache_service import region
+
 from app.repositories.city_repository import CityRepository
 from app.schemas.city import CityCreate, CityUpdate, CityRead
-from app.services.cache.cache_service import region
 
 class CityService:
     def __init__(self, repo: CityRepository):
@@ -54,6 +56,12 @@ class CityService:
     
     def get_city_by_state_id(self, db:SASession, state_id:int):
         return self.repo.get_by_state_id(db,state_id)
+    
+    def get_city_by_country_id(self, db:SASession, country_id:int):
+        return self.repo.get_by_country_id(db,country_id)
+    
+    def get_city_by_country_code(self, db:SASession, country_code:str):
+        return self.repo.get_by_country_code(db,country_code)
 
     def create_city(self, db: SASession, city: CityCreate):
         obj = self.repo.create(db, city)

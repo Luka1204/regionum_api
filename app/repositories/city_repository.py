@@ -1,6 +1,7 @@
 from typing import Optional, List,Iterator
 from sqlalchemy import select, func
 from sqlalchemy.orm import Session
+
 from app.db.models.city import City
 from app.schemas.city import CityCreate, CityUpdate  # si usás Update luego
 
@@ -47,6 +48,16 @@ class CityRepository:
         stmt = select(City).order_by(City.id).where(City.state_id == state_id)
         res = db.execute(stmt).scalars().all()
         return res 
+    
+    def get_by_country_id(self, db:Session, country_id:int):
+        stmt = select(City).order_by(City.id).where(City.country_id == country_id)
+        res = db.execute(stmt).scalars().all()
+        return res
+    
+    def get_by_country_code(self, db:Session, country_code:str):
+        stmt = select(City).order_by(City.id).where(City.country_code == country_code)
+        res = db.execute(stmt).scalars().all()
+        return res
 
     def create(self, db: Session, city: CityCreate) -> City:
         # Pydantic v2

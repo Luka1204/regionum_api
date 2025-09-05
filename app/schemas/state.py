@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel,ConfigDict
 from datetime import datetime
 
 class StateBase(BaseModel):
@@ -36,6 +36,7 @@ class StateRead(StateBase):
     updated_at: datetime 
     flag: int 
     wikiDataId: str | None = None
+    model_config = ConfigDict(from_attributes=True)  # << clave
 class StateUpdate(StateBase):
     id: int
     name: str

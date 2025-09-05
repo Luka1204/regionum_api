@@ -77,6 +77,20 @@ def get_city_by_state_code(state_id:int, db:Session=Depends(get_db)):
         raise HTTPException(status_code=404, detail="City not found")
     return city
 
+@router.get("/cityByCountryId/{country_id}",response_model=list[CityRead])
+def get_city_by_country_id(country_id:int, db:Session=Depends(get_db)):
+    city = service.get_city_by_country_id(db,country_id)
+    if not city:
+        raise HTTPException(status_code=404, detail="City not found")
+    return city
+
+@router.get("/cityByCountryCode/{country_code}",response_model=list[CityRead])
+def get_city_by_country_code(country_code:str, db:Session=Depends(get_db)):
+    city = service.get_city_by_country_code(db,country_code)
+    if not city:
+        raise HTTPException(status_code=404, detail="City not found")
+    return city
+
 @router.post("/", response_model=CityRead)
 def create_city(city: CityCreate, db: Session = Depends(get_db)):
     """
